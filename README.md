@@ -1,4 +1,4 @@
-# PDA 扫码发货 WebView 壳
+# 安卓 WebView 壳
 
 改app名字
 app/src/main/res/values/strings.xml 第 3 行
