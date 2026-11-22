@@ -34,10 +34,13 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
-    // ===== 改成你的地址：正式站把 test 换成实际域名即可 =====
+    // ===== 要框的网址 =====
     private static final String TARGET_URL = "https://test.cn12315.com/pda_login";
-    // 只允许本站域名在 WebView 内打开，外部链接交给系统浏览器
-    private static final String SITE_HOST = "test.cn12315.com";
+
+
+    
+    // 允许的域名自动从 TARGET_URL 提取，不用手动改
+    private static final String SITE_HOST = Uri.parse(TARGET_URL).getHost();
 
     private WebView webView;
     private ProgressBar progress;
