@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
         s.setCacheMode(WebSettings.LOAD_DEFAULT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 兼容页面里可能混用的 http 静态资源（https 主站）
-            s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBLE_MODE);
+            s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         }
 
         // Cookie 保持：登录态靠 PHPSESSID，必须开
