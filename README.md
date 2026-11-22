@@ -14,8 +14,7 @@ app/src/main/res/values/strings.xml 第 3 行
 `app/src/main/java/com/cn12315/pda/MainActivity.java` 顶部两个常量：
 
 
-## 一、改首页地址也是在上面这个地址  
- 
+## 一、改首页地址也是在上面这个文件
 
 ```java
  // ===== 应用启动时 加载的商户登录入口 =====
