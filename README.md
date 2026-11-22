@@ -8,8 +8,8 @@
 `app/src/main/java/com/cn12315/pda/MainActivity.java` 顶部两个常量：
 
 ```java
-private static final String TARGET_URL = "https://test.cn12315.com/pda_login";
-private static final String SITE_HOST  = "test.cn12315.com";
+ // ===== 应用启动时 加载的商户登录入口 =====
+    private static final String TARGET_URL = "https://test.cn12315.com/pda_login?c=ckbs";
 ```
 
 - `TARGET_URL`：APK 打开就加载的页面（登录页）。上线换正式域名时改这里。
