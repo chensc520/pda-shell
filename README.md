@@ -1,16 +1,21 @@
 # PDA 扫码发货 WebView 壳
 
-app名字
+改app名字
 app/src/main/res/values/strings.xml 第 3 行
-
 <string name="app_name">定义的名字</string>
 
 一个最小的 Android WebView 工程：全屏加载 PDA 专用登录页，登录后在网页内跳转到扫码发货页。
 扫码走 PDA 的键盘模拟（HID），光标在输入框里扫码即填入并回车——APK 不处理扫码，只负责把网页跑好。
 
-## 一、改地址
 
+
+## 改状态栏颜色也是这个文件里  搜  getWindow().setStatusBarColor(Color.parseColor("#428bca"));
+## 改成自己喜欢的颜色
 `app/src/main/java/com/cn12315/pda/MainActivity.java` 顶部两个常量：
+
+
+## 一、改首页地址也是在上面这个地址  
+ 
 
 ```java
  // ===== 应用启动时 加载的商户登录入口 =====
