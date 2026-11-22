@@ -35,7 +35,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
     // ===== 要框的网址 =====
-    private static final String TARGET_URL = "https://test.cn12315.com/pda_login";
+    private static final String TARGET_URL = "https://test.cn12315.com/pda_login?c=ckbs";
 
 
     
