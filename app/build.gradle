@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    // AGP 8.x 必须用 namespace（替代旧版 package）
+    namespace 'com.cn12315.pda'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.cn12315.pda'
+        // PDA 是 Android 11，minSdk 26 完全覆盖；用自适应图标不需要低版本 png
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
