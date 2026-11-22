@@ -34,12 +34,12 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
-    // ===== 应用启动 将加截的登录网址 =====
+    // ===== 应用启动时 加载的商户登录入口 =====
     private static final String TARGET_URL = "https://test.cn12315.com/pda_login?c=ckbs";
 
 
-    
-    // 允许的域名自动从 TARGET_URL 提取，不用手动改
+
+    // 允许的域名 自动从 TARGET_URL 提取 
     private static final String SITE_HOST = Uri.parse(TARGET_URL).getHost();
 
     private WebView webView;
@@ -50,8 +50,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 去掉标题栏，保留状态栏（PDA 上要看电量/时间）
+        // 去掉标题栏，保留状态栏并设背景色（PDA 上能看到电量/时间）
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 状态栏背景色：本项目 minSdk 26，直接调用即可（无需版本判断）
+        getWindow().setStatusBarColor(Color.parseColor("#428bca"));
 
         // 屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
