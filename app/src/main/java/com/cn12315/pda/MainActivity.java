@@ -28,7 +28,7 @@ import android.widget.TextView;
  * 扫码走 PDA 键盘模拟（HID）：网页输入框聚焦后扫码即填入 + 回车，
  * 因此这里不接收扫码广播，只负责：
  *   1) 常亮          —— 仓库作业不必反复点亮
- *   2) 软键盘顶起页面 —— Manifest 里 adjustResize，输入时布局上移，避免键盘遮挡输入框
+ *   2) 软键盘顶起页面 —— Manifest 里 adjustPan，输入时窗口整体上移，输入框露出键盘上方
  *   3) Cookie 保持    —— 登录态跨页面延续
  *   4) 返回键交给网页 —— 在 WebView 内后退，不直接退出 App
  */
@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
         FrameLayout root = new FrameLayout(this);
         root.setBackgroundColor(Color.rgb(238, 242, 247));
 
-        webView = new WebView(getApplicationContext());
+        webView = new WebView(this);
         progress = new ProgressBar(this);
         errorView = new TextView(this);
         errorView.setText("加载失败，点击重试");
