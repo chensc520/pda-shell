@@ -96,6 +96,9 @@ public class MainActivity extends Activity {
     private void configWebView() {
         WebSettings s = webView.getSettings();
 
+        // PDA 客户端标识：服务端据此判断会话过期时跳 /pda_login（strpos 大小写敏感，勿改大小写）
+        s.setUserAgentString(s.getUserAgentString() + " cn12315pda");
+
         // JS 必须开：登录/发货页靠 ajax 调接口
         s.setJavaScriptEnabled(true);
         // 支持 viewport meta，页面按 320 CSS 像素渲染
