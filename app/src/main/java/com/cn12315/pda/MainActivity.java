@@ -22,30 +22,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * PDA WebView 壳
- *
- * 只做一件事：全屏加载 PDA 专用登录页，登录后由网页跳转到扫码发货页。
- * 扫码走 PDA 键盘模拟（HID）：网页输入框聚焦后扫码即填入 + 回车，
- * 因此这里不接收扫码广播，只负责：
- *   1) 常亮          —— 仓库作业不必反复点亮
- *   2) 软键盘顶起页面 —— Manifest 里 adjustPan，输入时窗口整体上移，输入框露出键盘上方
- *   3) Cookie 保持    —— 登录态跨页面延续
- *   4) 返回键交给网页 —— 在 WebView 内后退，不直接退出 App
+ * PDA WebView 框架
  */
 public class MainActivity extends Activity {
 
-    // ===== 应用启动时 加载的商户登录入口 =====
-    private static final String TARGET_URL = "https://test.cn12315.com/pda_login?c=ckbs";
+    // ===================== 常用配置：以后只改这一块 =====================
+    private static final String TARGET_URL = "https://test.cn12315.com/pda_login?c=ckbs";       /** 应用启动时加载的商户登录入口 */
+    private static final String SH_NO = "ckbs";                                                /** 商户编号 sh_no：会话过期跳 /pda_login?c=xxx 要用，需与上面 URL 里 c= 的值一致 */
+    private static final String CLIENT_TAG = "cn12315pda";                                    /** PDA 客户端标识：服务端据此判断会话过期跳 /pda_login（大小写敏感，勿改） */
+    private static final String STATUS_BAR_COLOR = "#428bca";                                /** 顶部状态栏颜色 */
+    // ===================================================================
 
-
-
-    // 允许的域名 自动从 TARGET_URL 提取 
+    // 允许的域名 自动从 TARGET_URL 提取
     private static final String SITE_HOST = Uri.parse(TARGET_URL).getHost();
-
     private WebView webView;
     private ProgressBar progress;
     private TextView errorView;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +46,7 @@ public class MainActivity extends Activity {
         // 去掉标题栏，保留状态栏并设背景色（PDA 上能看到电量/时间）
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 状态栏背景色：本项目 minSdk 26，直接调用即可（无需版本判断）
-        getWindow().setStatusBarColor(Color.parseColor("#428bca"));
+        getWindow().setStatusBarColor(Color.parseColor(STATUS_BAR_COLOR));
 
         // 屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -96,8 +89,8 @@ public class MainActivity extends Activity {
     private void configWebView() {
         WebSettings s = webView.getSettings();
 
-        // PDA 客户端标识：服务端据此判断会话过期时跳 /pda_login（strpos 大小写敏感，勿改大小写）
-        s.setUserAgentString(s.getUserAgentString() + " cn12315pda");
+
+        s.setUserAgentString(s.getUserAgentString() + " " + CLIENT_TAG + " sh_no:" + SH_NO);
 
         // JS 必须开：登录/发货页靠 ajax 调接口
         s.setJavaScriptEnabled(true);
