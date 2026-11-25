@@ -31,21 +31,21 @@ import android.widget.TextView;
  * PDA WebView 框架
  *
  * 断网策略：启动时先判断网络，没网就把 WebView 整个隐藏，
- * 只显示一行纯文字提示（不含任何网址，别人看不出是内嵌网页）。
+ * 只显示一行纯文字提示。
  * 网络恢复后自动加载首页。
  */
 public class MainActivity extends Activity {
 
-    // ===================== 常用配置：以后只改这一块 =====================
+    // ===================== 常用配置 =====================
     private static final String TARGET_URL = "https://mp.cn12315.com/pda_login";                /** 应用启动时加载的商户登录入口 */
-    private static final String SH_NO = "ckbs";                                                /** 商户编号 sh_no：会话过期跳 /pda_login?c=xxx 要用，需与上面 URL 里 c= 的值一致 */
+    private static final String SH_NO = "ckbs";                                                /** 商户编号 sh_no：会话过期跳 /pda_login 要用 */
     private static final String CLIENT_TAG = "cn12315pda";                                    /** PDA 客户端标识：服务端据此判断会话过期跳 /pda_login（大小写敏感，勿改） */
     private static final String STATUS_BAR_COLOR = "#428bca";                                /** 顶部状态栏颜色 */
-    private static final String OFFLINE_TIP = "网络连接失败，请检查网络设置后重试";            /** 断网时显示的文字（纯文字，不含任何网址） */
+    private static final String OFFLINE_TIP = "当前设备未联网\n请检查Wifi或移动数据";          /** 断网时显示的文字（纯文字，不含任何网址） */
     // ===================================================================
 
-    // 允许的域名 自动从 TARGET_URL 提取
-    private static final String SITE_HOST = Uri.parse(TARGET_URL).getHost();
+    
+    private static final String SITE_HOST = Uri.parse(TARGET_URL).getHost();   // 允许的域名 自动从 TARGET_URL 提取
 
     private WebView webView;
     private ProgressBar progress;
